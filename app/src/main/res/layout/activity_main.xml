@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@drawable/background">
+    android:background="@drawable/bg1">
 
     <ImageView
         android:id="@+id/imageView"
@@ -19,14 +19,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.025"
         tools:ignore="MissingConstraints">
-
     </ImageView>
 
     <EditText
         android:id="@+id/code1"
         android:layout_width="285dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
+        android:background="@drawable/sheet"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -38,7 +37,7 @@
         android:id="@+id/code2"
         android:layout_width="285dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
+        android:background="@drawable/sheet"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -50,7 +49,7 @@
         android:id="@+id/code3"
         android:layout_width="285dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
+        android:background="@drawable/sheet"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
@@ -62,7 +61,7 @@
         android:id="@+id/code4"
         android:layout_width="285dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
+        android:background="@drawable/sheet"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"

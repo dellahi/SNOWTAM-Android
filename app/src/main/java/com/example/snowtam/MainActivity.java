@@ -29,7 +29,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    ListSnowtam listSnowtam = new ListSnowtam();
     public EditText code1;
     public EditText code2;
     public EditText code3;
@@ -39,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     public String URL;
     public RequestQueue requestQueue;
     public Gson json;
+    public ListSnowtam listsnowtam = new ListSnowtam();
+    public String api_key; // "7fb0e070-302a-11eb-8517-83ab2aba25d1"
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,56 +52,62 @@ public class MainActivity extends AppCompatActivity {
         code4 = findViewById(R.id.code4);
         send = findViewById(R.id.button);
         listValue =  new ArrayList<>();
-
-        final Gson json = new Gson();
+        json = new Gson();
         requestQueue = Volley.newRequestQueue(this);
 
-        send.setOnClickListener(new View.OnClickListener() {
+/*        send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String value1 =code1.getText().toString();
-                listValue.add(value1);
-                String value2 =code2.getText().toString();
-                listValue.add(value2);
-                String value3=code3.getText().toString();
-                listValue.add(value3);
-                String value4=code4.getText().toString();
-                listValue.add(value4);
-        for (int i=0; i<4; i++) {
-            URL = "https://applications.icao.int/dataservices/api/notams-realtime-list?api_key=7fb0e070-302a-11eb-8517-83ab2aba25d1&format=json&criticality=1&locations="+ listValue.get(i);
-                Log.e("code1URL : ", URL);
-            ApiCall(URL);
-            }
-            }
-        });
+                listValue.add(code1.getText().toString());
+                listValue.add(code2.getText().toString());
+                listValue.add(code3.getText().toString());
+                listValue.add(code4.getText().toString());
+                ParsJsonFromICAO();
+        }
+        });*/
 }
-    public void ConvertJSonToJava(JSONArray response, Gson json) {
-        Type listSnowtamType = new TypeToken<ArrayList<Snowtam>>(){}.getType();
-        listSnowtam.liste = json.fromJson(String.valueOf(response),listSnowtamType);
-        Log.e("Response",listSnowtam.liste.get(0).getId());
-    }
-    public void ApiCall(String url ) {
-        JsonArrayRequest objectRequest = new JsonArrayRequest(
-                Request.Method.GET, url, null,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            Log.e("Response",response.get(0).toString());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+    public void ParsJsonFromICAO() {
+
+            for (int i=0; i< listValue.size() ; i++) {
+                URL = "https://applications.icao.int/dataservices/api/notams-realtime-list?api_key="+api_key+"&format=json&criticality=1&locations="+ listValue.get(i);
+
+                JsonArrayRequest objectRequest = new JsonArrayRequest(
+                        Request.Method.GET, URL, null,
+                        new Response.Listener<JSONArray>() {
+                            @Override
+                            public void onResponse(JSONArray response) {
+                                try {
+                                    Log.e("ResponseArray",response.toString());
+                                    for (int i=0; i< response.length(); i++){
+                                        JSONObject jsonObjectTest = (JSONObject) response.get(i);
+                                        if( jsonObjectTest.getString("all").contains("SNOWTAM") ) {
+                                            Log.e("ResponseIF", "if");
+                                            Log.e("ResponseSnow",jsonObjectTest.toString());
+                                            ConvertJSonToJava(jsonObjectTest, json);
+                                            // index = i;
+                                            break;
+                                        }
+
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
                         }
-                        ConvertJSonToJava(response, json);
-                    }
-                }
-                ,
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Error", error.toString());
-                    }
-                }
-        );
-        requestQueue.add(objectRequest);
-        // Code here executes on main thread after user presses button
+                        ,
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.e("Error", error.toString());
+                            }
+                        }
+                );
+                requestQueue.add(objectRequest);
+            }
+        }
+    public void ConvertJSonToJava(JSONObject response, Gson json) {
+        Snowtam reslt = json.fromJson(String.valueOf(response),Snowtam.class);
+        listsnowtam.liste.add(reslt);
+        Log.e("ResponseID",reslt.getId());
     }
+
 }
