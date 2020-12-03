@@ -2,6 +2,7 @@ package com.example.snowtam;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,18 +14,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.snowtam.Model.ListSnowtam;
 import com.example.snowtam.Model.Snowtam;
+import com.example.snowtam.View.DisplayInfo;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         code2 = findViewById(R.id.code2);
         code3 = findViewById(R.id.code3);
         code4 = findViewById(R.id.code4);
-        send = findViewById(R.id.button);
+        send = findViewById(R.id.btnsend);
         listValue =  new ArrayList<>();
         json = new Gson();
         requestQueue = Volley.newRequestQueue(this);
@@ -64,6 +63,12 @@ public class MainActivity extends AppCompatActivity {
                 ParsJsonFromICAO();
         }
         });*/
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, DisplayInfo.class));
+            }
+        });
 }
     public void ParsJsonFromICAO() {
 

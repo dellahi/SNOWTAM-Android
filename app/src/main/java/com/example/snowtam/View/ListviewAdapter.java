@@ -1,4 +1,4 @@
-package com.example.snowtam;
+package com.example.snowtam.View;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.example.snowtam.R;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
