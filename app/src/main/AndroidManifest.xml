@@ -26,11 +26,13 @@
         -->
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps">
+
+        </activity>
 
         <activity android:name=".View.DecodedInofs" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".View.DisplayInfo">
+        <activity android:name=".View.DisplayInfo"/>
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

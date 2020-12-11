@@ -10,16 +10,18 @@ import android.widget.TextView;
 
 import com.example.snowtam.R;
 
+import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 class ListviewAdapter extends ArrayAdapter {
 
     Activity context;
-    String[] aInfos;
-    String[] aLettres;
+    ArrayList<String>  aInfos;
+    ArrayList<String> aLettres;
 
-    ListviewAdapter (Activity c, String [] aLettres, String [] aInfos) {
+    ListviewAdapter (Activity c, ArrayList<String>  aLettres, ArrayList<String>  aInfos) {
         super(c, R.layout.row, aLettres);
         this.context = c;
         this.aInfos=aInfos;
@@ -36,8 +38,8 @@ class ListviewAdapter extends ArrayAdapter {
         TextView info = row.findViewById(R.id.textView2);
 
         // now set our resources on views
-        lettre.setText(aLettres[position]);
-        info.setText(aInfos[position]);
+        lettre.setText(aLettres.get(position));
+        info.setText(aInfos.get(position));
 
         return row;
     }

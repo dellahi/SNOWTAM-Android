@@ -13,6 +13,10 @@ import com.example.snowtam.MainActivity;
 import com.example.snowtam.MapsActivity;
 import com.example.snowtam.R;
 
+import static com.example.snowtam.Asset.BasicAsset.decodefieldsArray;
+import static com.example.snowtam.Asset.BasicAsset.decodeinfosArray;
+
+
 public class DecodedInofs extends AppCompatActivity {
     ListView listView2;
     ImageView home;
@@ -47,7 +51,7 @@ public class DecodedInofs extends AppCompatActivity {
                         startActivity(new Intent(DecodedInofs.this, MapsActivity.class));
                     }
                 });
-        ListviewAdapter adapter = new ListviewAdapter(this, lettres, infos);
+        ListviewAdapter adapter = new ListviewAdapter(this, decodefieldsArray, decodeinfosArray);
         listView2.setAdapter(adapter);
     }
 }
